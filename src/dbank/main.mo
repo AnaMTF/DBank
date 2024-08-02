@@ -6,11 +6,12 @@ import Time "mo:base/Time";
 
 actor DBank { //class in motoko
   stable var currentValue: Float = 300; //orthoganally persistent variable
-
+  currentValue := 300;
   stable var startTime = Time.now();
+  startTime := Time.now();
   Debug.print(debug_show(startTime));
 
-  let id = 361283218; //constant
+  //let id = 361283218; //constant
 
   public func topUp(amount: Float) {
     currentValue += amount;
@@ -34,9 +35,9 @@ actor DBank { //class in motoko
   public func compound() {
     let currentTime = Time.now();
     let timeDiff = currentTime - startTime;
-    let timeDiffInSec = timeDiff / 1000000000;
+    let timeDiffInMin = timeDiff / 60000000000;
 
-    currentValue := currentValue * (1.01 ** Float.fromInt(timeDiffInSec));
+    currentValue := currentValue * (1.01 ** Float.fromInt(timeDiffInMin));
     startTime := currentTime;
   };
 }
